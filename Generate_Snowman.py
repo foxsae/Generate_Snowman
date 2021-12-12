@@ -1,9 +1,4 @@
 """
-Author = "Alex Combas"
-Copyright = "Copyright (C) 2022 Alex Combas"
-License = "GNU GPL"
-Version = "0.1"
-
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +11,23 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+COPYRIGHT = "Copyright (c) 2022 Alex Combas"
 """
+
+bl_info = {
+    "name": "Generate Snowman",
+    "description": "Generate a snowman!",
+    "author": "Alex Combas <alex@flyingcastle.net>",
+    "version": (0,1),
+    "blender": (2, 93, 6),
+    "location": "Operator Search",
+    "warning": "",
+    "doc_url": "",
+    "tracker_url": "",
+    "support": "COMMUNITY",
+    "category": "Mesh",
+}
 
 import bpy, bmesh
 from math import radians
@@ -162,5 +173,3 @@ def register():
 def unregister():
     bpy.utils.unregister_class(MESH_OT_Generate_Snowman)
 
-if __name__ == '__main__':
-    register()
