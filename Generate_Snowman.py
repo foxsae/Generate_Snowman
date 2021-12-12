@@ -29,12 +29,16 @@ class MESH_OT_Generate_Snowman(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
 
     # turn on bloom and ambiant occlusion if using Eevee
-    if (bpy.data.scenes['Scene'].render.engine == 'BLENDER_EEVEE'):  
+    if (bpy.data.scenes['Scene'].render.engine == 'BLENDER_EEVEE'):
         bpy.data.scenes["Scene"].eevee.use_bloom = True
         bpy.data.scenes["Scene"].eevee.use_gtao = True
 
     #turn on real_snow addon
     bpy.ops.preferences.addon_enable(module="real_snow")
+
+    @classmethod
+    def poll(cls, context):
+        return context.area.type == 'VIEW_3D'
 
     def generate_arm(self):
         bpy.ops.mesh.primitive_cube_add(size=0.05)
