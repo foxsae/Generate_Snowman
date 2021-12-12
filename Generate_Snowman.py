@@ -33,7 +33,7 @@ class MESH_OT_Generate_Snowman(bpy.types.Operator):
         bpy.data.scenes["Scene"].eevee.use_bloom = True
         bpy.data.scenes["Scene"].eevee.use_gtao = True
 
-    #turn on real_snow addon  
+    #turn on real_snow addon
     bpy.ops.preferences.addon_enable(module="real_snow")
 
     def generate_arm(self):
@@ -106,7 +106,7 @@ class MESH_OT_Generate_Snowman(bpy.types.Operator):
     def execute(self, context):
         # create gound mesh and cover with snow
         bpy.ops.mesh.primitive_plane_add()
-        ao = bpy.context.active_object
+        ao = context.active_object
         ao.scale = (2, 2, 2)
         bpy.ops.snow.create()
 
@@ -121,7 +121,7 @@ class MESH_OT_Generate_Snowman(bpy.types.Operator):
         # index variable 'snow_balls' starts at zero so that it can also be used in rotation_euler 0, 1, 2
         while (snow_balls < 3):
             bpy.ops.mesh.primitive_uv_sphere_add()
-            ao = bpy.context.active_object
+            ao = context.active_object
             ao.location[2] = sb_location
             ao.rotation_euler[snow_balls] += radians(sb_rotation)
             ao.scale = (sb_scale, sb_scale, sb_scale)
