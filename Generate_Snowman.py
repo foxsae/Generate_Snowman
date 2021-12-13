@@ -126,9 +126,11 @@ class MESH_OT_Generate_Snowman(bpy.types.Operator):
         sb_rotation = 45
         snow_balls = 0 
 
-        # create three spheres, give them clouds displacement and move them around
-        # append snow texture to each sphere, the snow texture comes from bpy.ops.snow.create()
-        # index variable 'snow_balls' starts at zero so that it can also be used in rotation_euler 0, 1, 2
+        # create three spheres, give them clouds displacement
+        # append snow texture to each sphereops.snow.create()
+        # the snow comes from real_snow addon
+        # index variable 'snow_balls' starts at zero so that it 
+        # can also be used in rotation_euler 0, 1, 2
         while (snow_balls < 3):
             bpy.ops.mesh.primitive_uv_sphere_add()
             ao = context.active_object
@@ -169,7 +171,8 @@ class VIEW3D_PT_Generate_Snowman(bpy.types.Panel):
     bl_label = 'Generate'
 
     def draw(self, context):
-        self.layout.operator('mesh.generate_snowman')
+        self.layout.operator('mesh.generate_snowman',
+        icon='FREEZE')
 
 def register():
     bpy.utils.register_class(MESH_OT_Generate_Snowman)
