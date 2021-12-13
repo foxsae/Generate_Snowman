@@ -39,14 +39,6 @@ class MESH_OT_Generate_Snowman(bpy.types.Operator):
     bl_label = "Generate Snowman"
     bl_options = {'REGISTER', 'UNDO'}
 
-    # turn on bloom and ambiant occlusion if using Eevee
-    if (bpy.data.scenes['Scene'].render.engine == 'BLENDER_EEVEE'):
-        bpy.data.scenes["Scene"].eevee.use_bloom = True
-        bpy.data.scenes["Scene"].eevee.use_gtao = True
-
-    #turn on real_snow addon
-    bpy.ops.preferences.addon_enable(module="real_snow")
-
     @classmethod
     def poll(cls, context):
         return context.area.type == 'VIEW_3D'
@@ -119,6 +111,9 @@ class MESH_OT_Generate_Snowman(bpy.types.Operator):
             ao.data.materials.append(new_mat)
 
     def execute(self, context):
+        #enable real_snow addon
+        bpy.ops.preferences.addon_enable(module="real_snow")
+
         # create gound mesh and cover with snow
         bpy.ops.mesh.primitive_plane_add()
         ao = context.active_object
@@ -167,9 +162,20 @@ class MESH_OT_Generate_Snowman(bpy.types.Operator):
 
         return {'FINISHED'}
 
+class VIEW3D_PT_Generate_Snowman(bpy.types.Panel):
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = 'Snowman'
+    bl_label = 'Generate'
+
+    def draw(self, context):
+        self.layout.operator('mesh.generate_snowman')
+
 def register():
     bpy.utils.register_class(MESH_OT_Generate_Snowman)
+    bpy.utils.register_class(VIEW3D_PT_Generate_Snowman)
 
 def unregister():
     bpy.utils.unregister_class(MESH_OT_Generate_Snowman)
+    bpy.utils.unregister_class(VIEW3D_PT_Generate_Snowman)
 
