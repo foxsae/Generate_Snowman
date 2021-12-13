@@ -171,8 +171,10 @@ class VIEW3D_PT_Generate_Snowman(bpy.types.Panel):
     bl_label = 'Generate'
 
     def draw(self, context):
-        self.layout.operator('mesh.generate_snowman',
-        icon='FREEZE')
+        col = self.layout.column(align=True)
+        col.operator('mesh.generate_snowman',
+                     text='Default Snowman',
+                     icon='FREEZE')
 
 def register():
     bpy.utils.register_class(MESH_OT_Generate_Snowman)
